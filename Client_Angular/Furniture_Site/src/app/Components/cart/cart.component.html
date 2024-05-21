@@ -1,0 +1,68 @@
+<div class="text">
+  <h1>Cart</h1>
+  <a href="/home">Home</a>
+  <span>/Cart</span>
+</div>
+<div class="parent container mt-2">
+
+  <div>
+
+    <div class=" table-responsive">
+
+      <table class="table align-middle">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th> Subtotal</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of cartItems">
+            <td><img src="{{product.image}}" height="65px"  width="110px" class="ms-lg-3 ms-1 ms=md-2" ></td>
+            <td>{{product.name}}</td>
+            <td>{{product.price}}</td>
+            <td>
+              <div class="py-1 px-2 border border-gray d-flex align-items-center gap-2">
+
+                <button class="border border-0 bg-transparent" id="{{product}}" (click)="plus(product)">
+                  +
+                </button>
+                <span>{{ product.totalquantity}}</span>
+                <button class="border border-0 bg-transparent" id="{{product}}" (click)="minus(product)">
+                  -
+                </button>
+              </div>
+            </td>
+            <td>{{product.totalprice}}</td>
+            <td><button (click)="deleteRow(product)" class=" btn btn-danger">Delete</button></td>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+
+
+    <div class="CHECKOUT col-lg-3 mt-2 mb-2">
+      <h1>Cart Totals</h1>
+
+      <p>Total <span class="Sub">{{totalpriceforall}}</span></p>
+
+      <button class="btn btn-dark" (click)="checkorder()">PROCEED TO CHECKOUT</button>
+    </div>
+  </div>
+
+
+  <!-- </div>
+<div class="col-sm-4 carttotals">
+  <h1>Cart Totals</h1>
+  <ul>
+    <li><span>Subtotal</span> <span>1200</span></li>
+    <li><span>Total</span> <span>2000</span></li>
+  </ul>
+  <button class="btn btn-dark">PROCEED TO CHECKOUT</button> -->

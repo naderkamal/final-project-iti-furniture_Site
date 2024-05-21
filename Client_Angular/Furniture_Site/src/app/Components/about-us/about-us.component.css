@@ -1,0 +1,28 @@
+/* style header of page */
+.header-container {
+    width: 100%;
+    height: 80vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.header-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.text-container {
+    position: absolute;
+    top: 13%;
+    left: 4%;
+    transform: translateY(-50%);
+    text-align: center;
+    color: white;
+}
+
+.line {
+    font-size: 100px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}

@@ -1,0 +1,29 @@
+.container {
+  margin-top: 20px;
+}
+
+.card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin: 16px;
+  padding: 16px;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.readonlyClass {
+  border: none;
+  display: block;
+  width: 100%;
+}
+.readonlyClass:focus {
+  outline: none;
+}
+@media screen and (min-width: 768px) {
+  .mt-100 {
+    margin-top: 100px;
+  }
+}

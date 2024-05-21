@@ -1,0 +1,102 @@
+﻿@model AdminDashboardMVC.DTO.Users
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1 class="text-center">User Details</h1>
+
+<div>
+
+    <hr />
+    <dl class="row">
+        <div class="col-md-6">
+            <dt>
+                @Html.DisplayNameFor(model => model.Id)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Id)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Age)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Age)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.SSN)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.SSN)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.PhoneNumber)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Password)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Password)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+        </div>
+        <div class="col-md-6">
+            <dt>
+                @Html.DisplayNameFor(model => model.LastName)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.LastName)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.FirstName)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Street)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Street)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.City)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.City)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Governorate)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Governorate)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Role)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Role)
+            </dd>
+        </div>
+    </dl>
+
+
+</div>
+<div class="d-flex align-items-center mt-6">
+    <div class="me-2">
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-warning" })
+    </div>
+@* 
+    @using (Html.BeginForm("Delete", "Settings", FormMethod.Post, new { id = "deleteForm", onsubmit = $"return confirm('Are you sure you want to delete {Model.FirstName} with role {Model.Role}?');" }))
+    {
+        @Html.Hidden("id", Model.Id)
+        <button type="submit" class="btn btn-danger me-1 d-flex justify-content-center align-items-center">Delete</button>
+    } *@
+</div>

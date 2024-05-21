@@ -1,0 +1,36 @@
+<div class="container-fluid">
+    <div class="text">
+        <h1>WishList</h1>
+        <a href="/home">Home</a> 
+        <span>/WishList</span>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th></th> 
+                        <th></th> 
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Stock Status</th>
+                        <th ></th>
+                        
+                    </tr>
+                </thead>
+                <tbody >
+                    <tr *ngFor="let product of cartItems">
+                        <td class=" mt-50"><button (click)="deleteRow(product)" class="btn btn-white">X</button></td> 
+                        <td class="text-center "><img src="{{product.image}}"  height="65px"  width="110px" class="ms-lg-3 ms-1 ms=md-2"></td>
+                        <td class="text-center">{{product.name}}</td>
+                        <td class="text-center">{{product.price}}</td>
+                        <td class="text-center">{{product.stock}}</td>
+                        <td class="text-center"><button id="{{product.id}}" (click)="addToCart($event)" class="btn btn-dark">AddToCart</button></td>
+                      
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

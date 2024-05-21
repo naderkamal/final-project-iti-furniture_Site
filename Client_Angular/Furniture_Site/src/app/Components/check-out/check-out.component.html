@@ -1,0 +1,182 @@
+
+ <!-- style="height: 1000px;" -->
+ <div >
+ 
+    <!-- start header title -->
+     <div style="position: relative; margin-bottom: 50px;">
+       <img src="../../../assets/Images/orders.jpg" alt="Cinque Terre" class="img-fluid" width="1000" height="300">
+       <div class="center">Checkout</div>
+     </div>
+    <!-- end header title -->
+    @if (alertState) {
+    <div class="mx-5 px-5">
+      <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+        </symbol>
+        <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+        </symbol>
+        <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+        </symbol>
+      </svg>
+    <div class="alert alert-success d-flex align-items-center my-3" mx-5 role="alert">
+      <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+      <div>
+         Your Order has been placed Succesfuly. <br> &nbsp;Wait for admin Acception...
+      </div>
+    </div>
+  </div>
+}
+@if (WarrningState) {
+  <div class="mx-5 px-5">
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+      <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+      </symbol>
+      <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+      </symbol>
+      <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+      </symbol>
+    </svg>
+    <div class="alert alert-warning d-flex align-items-center" role="alert">
+      <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+      <div>
+       Warning : You cannot place order without selecting Products !!! 
+      </div>
+    </div>
+</div>
+}
+    <!------------------- start  check out body   ------------------->
+    <div  style="padding-left:50px ; padding-right: 50px; text-align: center;">
+      <!-- <div> User Order :  {{UserOrder|json}}</div>
+      <div>{{ShipingDate}}</div> -->
+        <div class="row row-cols-1 row-cols-lg-2 p-2 mb-3 mx-auto">
+           <!-------- start  billing info   -->
+            <div class=" col col-12 col-lg-8  pe-5  ">
+              <div class=" d-flex justify-content-start align-items-center border-bottom fs-3 pb-2 mb-4">Shipping Info</div>
+                <div class="row ">
+                   
+                    <div class="mb-3 col col-12 col-lg-6">
+                        <label for="fname" class="form-label  d-flex justify-content-start">First Name * </label>
+                        <input type="text" class="form-control" id="fname" [(ngModel)]="fname" placeholder="First name" #Firstname="ngModel"  required minlength="3" maxlength="20" >
+                        <div *ngIf="Firstname.errors?.['minlength']|| Firstname.errors?.['maxlength'] "  class="form-label  d-flex justify-content-start ps-2 text-denger" style=" font-size: 12px; color: red;">
+                          First Name must be at least 3 and not more 20 characters long.
+                          </div>  
+                          <div *ngIf="Firstname.errors?.['required'] && (Firstname.dirty || Firstname.touched)"  class="form-label  d-flex justify-content-start ps-2 " style="font-size: 12px; color: red;">
+                            Last Name is required.
+                            </div>              
+                        <!-- @if( fname.length <= 4){
+                          <div>
+                          <p style="color: red;">Age Not Valid</p>
+                        </div>
+                      }@else {
+                          <div>        
+                            <p style="color: greenyellow;">Age Valid</p>
+                          </div>
+                      }  -->
+                      </div>
+                      <div class="mb-3 col col-12 col-lg-6">
+                        <label for="lname" class="form-label  d-flex justify-content-start">Last Name * </label>
+                        <input type="text" class="form-control" id="lname" name="lname" placeholder="Last name" [(ngModel)]="lname" #lastname="ngModel"  required  minlength="3" maxlength="20"  >
+                          <div *ngIf="lastname.errors?.['minlength']|| Firstname.errors?.['maxlength'] "  class="form-label  d-flex justify-content-start ps-2 text-denger" style="font-size: 12px; color: red;">
+                          Last  Name must be at least 3 and not more 20 characters long.
+                          </div>            
+                          <div *ngIf="lastname.errors?.['required'] && (lastname.dirty || lastname.touched)"  class="form-label  d-flex justify-content-start ps-2 " style="font-size: 12px; color: red;">
+                            Last Name is required.
+                            </div>            
+                         
+                      </div>
+                      
+                      <div class="mb-3 col col-12">
+                        <label for="phone" class="form-label   d-flex justify-content-start">Phone *</label>
+                        <input type="number" class="form-control" id="phone" placeholder="Phone" [(ngModel)]="phone" #phone1="ngModel" required  minlength="10" maxlength="12">
+                        <div *ngIf="phone1.errors?.['required'] && (phone1.dirty || phone1.touched)"  class="form-label  d-flex justify-content-start ps-2 " style="font-size: 12px; color: red;">
+                          Phone is required.
+                          </div>
+                          <div *ngIf="phone1.errors?.['minlength']|| phone1.errors?.['maxlength'] "  class="form-label  d-flex justify-content-start ps-2 text-denger" style="font-size: 12px; color: red;">
+                            Phone must 11 number and long and must begain with (010 , 011 or 012).
+                            </div>   
+                           
+                      </div>
+                    <div class="mb-3 col col-12">
+                        <label for="email" class="form-label d-flex justify-content-start ">Email *</label>
+                        <input type="email" class="form-control" id="email" placeholder="name@example.com" [(ngModel)]="email" #email1="ngModel" required>
+                        <div *ngIf="email1.errors?.['required'] && (email1.dirty || email1.touched)"  class="form-label  d-flex justify-content-start ps-2 " style="font-size: 12px; color: red;">
+                         Email is required and must Contain &#64;
+                          </div>       
+                      </div>
+                      <div class="mb-3 col col-12">
+                        <label for="address" class="form-label d-flex justify-content-start "> Address *</label>
+                        <input type="email" class="form-control" id="address" placeholder="Address" [(ngModel)]="address" #address1="ngModel" required>
+                        <div *ngIf="address1.errors?.['required'] && (address1.dirty || address1.touched)"  class="form-label  d-flex justify-content-start ps-2 " style="font-size: 12px; color: red;">
+                          Address Name is required.
+                          </div>       
+                      </div>
+                      <div class="mb-3 col col-12">
+                        <label for="moreDetails" class="form-label d-flex justify-content-start"  [(ngModel)]="moreDetails">More Details&nbsp; <span style="font-size: smaller;" class="d-flex align-items-center">(optional)</span> </label>
+                        <textarea class="form-control" id="moreDetails" rows="3"  placeholder="more details for Delivery"></textarea>
+                      </div>
+                </div>
+               
+            </div>
+           <!---------- end  billing info   -->
+         <!-------- start  order info   --> 
+         <div  class=" col col-lg-4 col-md-8 col-sm-12  p-0 ">
+          <div  class=" bg-light p-0 ">
+            <div class="col  col-12 p-4"  >
+              <div class=" d-flex justify-content-start align-items-center border-bottom fs-3 pb-2 mb-4">Order </div>
+              <div class=" px-2 mb-4">
+                <div class="row fw-bold">
+                  <div class="col col-6 d-flex justify-content-start align-items-center">Product</div>
+                  <div class="col col-6 d-flex justify-content-end align-items-center">SubTotal</div>
+                </div>
+                <!-- Start ORDER Items  -->
+                @for (pr of UserOrder; track pr.id) {
+                <div class="row ">
+                  <div class="col col-6 d-flex justify-content-start align-items-center">{{pr.name}} x {{pr.totalquantity}} </div>
+                  <div class="col col-6 d-flex justify-content-end align-items-center">EGP {{pr.totalprice}}</div>
+                </div>
+              }
+                 <!-- Start ORDER total  -->
+                <div class="border-top pt-2 mt-3 row fw-bold">
+                  <div class="col col-6 d-flex justify-content-start align-items-center">SubTotal</div>
+                  <div class="col col-6 d-flex justify-content-end align-items-center">EGP {{Total}}</div>
+                </div>
+                <div class="row fw-bold">
+                  <div class="col col-6 d-flex justify-content-start align-items-center">shiping cost</div>
+                  <div class="col col-6 d-flex justify-content-end align-items-center">EGP {{shipingCost}}</div>
+                </div>
+                <div class="row fw-bold">
+                  <div class="col col-6 d-flex justify-content-start align-items-center">Total</div>
+                  <div class="col col-6 d-flex justify-content-end align-items-center">EGP {{Total+shipingCost}}</div>
+                </div>
+              </div>
+              <!--  -->
+               <div>More Info</div>
+               <div>Cash Payment on Delivery In ( 5 Days) at {{ShipingDate}}</div>
+                <!--  -->
+            </div>
+            <div style="height: 60px;" class="col col-12 bg-light d-flex justify-content-center align-items-center" >
+               <!-- <button type="button" class=" w-100 h-100 border-0  bg-dark text-white">Checkout</button> -->
+              <button class="Btn1 fs-5" (click)="placeOrder()">
+                Place Order
+                <svg class="svgIcon1" viewBox="0 0 576 512"><path d="M512 80c8.8 0 16 7.2 16 16v32H48V96c0-8.8 7.2-16 16-16H512zm16 144V416c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V224H528zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm56 304c-13.3 0-24 10.7-24 24s10.7 24 24 24h48c13.3 0 24-10.7 24-24s-10.7-24-24-24H120zm128 0c-13.3 0-24 10.7-24 24s10.7 24 24 24H360c13.3 0 24-10.7 24-24s-10.7-24-24-24H248z"></path></svg>
+              </button>
+            </div>
+        </div>
+         </div>
+         
+          <!-------- end  order info   -->   
+        </div>
+    </div>
+   <!------------------- end  check out body   ------------------->
+ 
+     
+   </div>
+   
+   
+   

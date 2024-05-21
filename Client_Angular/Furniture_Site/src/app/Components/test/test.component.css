@@ -1,0 +1,25 @@
+.card {
+  cursor: pointer; /* Add cursor pointer for clickable effect */
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: scale(1.1); /* Adjust the scale factor for desired zoom level */
+}
+
+.card.zoomed {
+  transform: scale(1.1); /* Keep the zoom effect after clicking */
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+  transition: transform 0.3s ease-in-out;
+}
+
+.card:hover img {
+  transform: scale(
+    1.1
+  ); /* Adjust the scale factor for desired image zoom level on hover */
+}

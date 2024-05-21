@@ -1,0 +1,33 @@
+
+button{
+    border-radius: 0px;
+  }
+  
+  form{
+    width: 30rem;
+  }
+  body{
+    background-color: rgb(150, 102, 102) !important;
+  }
+  
+  /* ------------------- */
+  img{
+    max-height: inherit;
+    transition-duration: 1s;
+  
+  }
+  
+  #card{
+    border: 0px;
+    overflow: hidden;
+  }
+  
+  #card:hover #img img {
+    transform: scale(1.04);
+    opacity: 0.8;
+  }
+  
+  label{
+    margin-top: 10px;
+    font-size: 0.8rem;
+  }

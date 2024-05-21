@@ -1,0 +1,199 @@
+<!-- style="background-color: #c1c1c1f8;" -->
+<nav class="navbar navbar-expand-lg  fixed-top bg-light" >
+  <div class="container" >
+      <a class="navbar-brand" href="#">
+          <!-- Replace 'logo.svg' with your logo image -->
+          
+          <img src="/assets/Images/logot.png" class="mt-1" alt="Logo" width="110" height="50">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+          <ul class="navbar-nav">
+              <li class="nav-item">
+                  <a class="nav-link active" [routerLinkActiveOptions]="{exact:true}"  routerLinkActive="active"  routerLink="/home">Home</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle"  routerLinkActive="active" routerLink="/products" id="navbarDropdown" role="button"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    Shop
+                </a>
+                <!-- <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="#">Living Room</a></li>
+                    <li><a class="dropdown-item" href="#">Bedroom</a></li>
+                    <li><a class="dropdown-item" href="#">Child Room</a></li>
+                </ul> -->
+            </li>
+            @if(login_State){
+
+              <li class="nav-item">
+                <a class="nav-link "  routerLinkActive="active"  routerLink="/orders">Orders</a>
+            </li>
+      
+            }
+              <li class="nav-item">
+                  <a class="nav-link"  routerLinkActive="active" routerLink="/about">About</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link"  routerLinkActive="active" routerLink="/contact" >Contact Us</a>
+              </li>
+             
+          </ul>
+      </div>
+      @if(login_State){
+
+        <div class="">
+         
+          <a class="nav-link d-inline"  routerLinkActive="active" routerLink="/profile">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="50" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+              <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+              <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+            </svg>
+          </a>
+          <a class="nav-link d-inline"  routerLinkActive="active" routerLink="/cart">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+            <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+        </svg>
+          </a>
+          <a class="nav-link d-inline"  routerLinkActive="active" routerLink="/wish">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-heart" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0M14 14V5H2v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1M8 7.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132"/>
+        </svg>
+          </a>
+        <button class="btn btn-outline-success  ms-4 button " (click)="LogOut()">Log out</button>
+    </div>   
+      }@else{
+        <div class="d-flex justify-content-start">
+          <a class="btn btn-outline-success me-2 button " routerLinkActive="active" routerLink="/login" >Login</a>
+          <a class="btn btn-secondary  me-4 button"  routerLinkActive="active" routerLink="/register">Sign Up</a>
+        
+      </div>
+      }
+      
+  </div>
+</nav>
+
+
+
+<!-- Navbar -->
+<!--<nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
+    Container wrapper
+    <div class="container-fluid">
+      Toggle button
+      <button
+        data-mdb-collapse-init
+        class="navbar-toggler"
+        type="button"
+        data-mdb-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <i class="fas fa-bars"></i>
+      </button>
+  
+      Collapsible wrapper
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        Navbar brand
+        <a class="navbar-brand mt-2 mt-lg-0" href="#">
+          <img
+            src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp"
+            height="15"
+            alt="MDB Logo"
+            loading="lazy"
+          />
+        </a>
+        Left links
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Team</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Projects</a>
+          </li>
+        </ul>
+        Left links
+      </div>
+      Collapsible wrapper
+  
+      Right elements
+      <div class="d-flex align-items-center">
+        Icon
+        <a class="text-reset me-3" href="#">
+          <i class="fas fa-shopping-cart"></i>
+        </a>
+  
+        Notifications
+        <div class="dropdown">
+          <a
+            data-mdb-dropdown-init
+            class="text-reset me-3 dropdown-toggle hidden-arrow"
+            href="#"
+            id="navbarDropdownMenuLink"
+            role="button"
+            aria-expanded="false"
+          >
+            <i class="fas fa-bell"></i>
+            <span class="badge rounded-pill badge-notification bg-danger">1</span>
+          </a>
+          <ul
+            class="dropdown-menu dropdown-menu-end"
+            aria-labelledby="navbarDropdownMenuLink"
+          >
+            <li>
+              <a class="dropdown-item" href="#">Some news</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="#">Another news</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </li>
+          </ul>
+        </div>
+        Avatar
+        <div class="dropdown">
+          <a
+            data-mdb-dropdown-init
+            class="dropdown-toggle d-flex align-items-center hidden-arrow"
+            href="#"
+            id="navbarDropdownMenuAvatar"
+            role="button"
+            aria-expanded="false"
+          >
+            <img
+              src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+              class="rounded-circle"
+              height="25"
+              alt="Black and White Portrait of a Man"
+              loading="lazy"
+            />
+          </a>
+          <ul
+            class="dropdown-menu dropdown-menu-end"
+            aria-labelledby="navbarDropdownMenuAvatar"
+          >
+            <li>
+              <a class="dropdown-item" href="#">My profile</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="#">Settings</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="#">Logout</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      Right elements
+    </div>
+    Container wrapper
+  </nav> -->
+  <!-- Navbar -->
+
+   

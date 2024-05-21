@@ -1,0 +1,48 @@
+<!-- header of page -->
+<div class="header-container">
+  <img src="/assets/Images/1.jfif" alt="Header Photo" class="header-photo">
+  <div class="text-container">
+    <div class="line">
+      <h1>products</h1>
+    </div>
+    <div class="line">Your Second Line</div>
+  </div>
+</div>
+
+<!-- filter of page -->
+<div class="alert alert-light m-2">
+  <div style="position: relative;z-index: 100;" class="filter">
+    <app-filter (myevent)="recivefilter($event)"></app-filter>
+  </div>
+</div>
+
+<!-- cards of page -->
+<div class="container mt-5 mb-4">
+  <div class="row row-cols-1 row-cols-md-4 g-3 mt-5">
+    @for (item of displayedProducts; track item.id)
+    {
+    @if (item) {
+    <div class="col-sm-12 col-md-9 col-lg-6 col-xl-4 col-xxl-3">
+      <app-card [oneproduct]="item"></app-card>
+    </div>
+    }
+    }
+  </div>
+</div>
+
+<!-- Pagination controls -->
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <nav aria-label="BSB Pagination 1 Example">
+        <ul class="pagination bsb-pagination-1 pagination-lg justify-content-center">
+          <li class="page-item"><button class="page-link" (click)="prevPage()"
+              [disabled]="currentPage === 1">Previous</button></li>
+          <li class="page-item"><span class="page-link">Page {{ currentPage }} of {{ totalPages }}</span></li>
+          <li class="page-item"><button class="page-link" (click)="nextPage()"
+              [disabled]="currentPage === totalPages">Next</button></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>

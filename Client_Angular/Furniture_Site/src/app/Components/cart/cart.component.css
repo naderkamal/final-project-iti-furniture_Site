@@ -1,0 +1,29 @@
+.text{
+    text-align: center;
+    color:black
+    width 100%;
+    height: 200px;
+    background-color:ghostwhite;
+  }
+  .text a{
+    text-decoration: none;
+    color:black;
+  }
+  /* .parent{
+ display: flex;
+ justify-content: space-between;
+  } */
+  .CHECKOUT {
+    background-color: ghostwhite;
+    margin: auto;
+    text-align: center;
+    
+}
+
+  
+  .CHECKOUT li{ list-style: none;
+    text-align: left;
+  }
+  .sub{
+    text-align: center;
+  }

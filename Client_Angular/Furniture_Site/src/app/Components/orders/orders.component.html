@@ -1,0 +1,275 @@
+ <!-- style="height: 1000px;" -->
+<div >
+
+  <!-- start header title -->
+  <div style="position: relative; margin-bottom: 50px;">
+    <img src="../../../assets/Images/orders.jpg" alt="Cinque Terre"
+      class="img-fluid" width="1000" height="300">
+    <div class="center">Orders</div>
+  </div>
+  <!-- end header title -->
+  <!-- <div> {{allOrders|json}}</div> -->
+ <!-- <div> {{allShipments|json}}</div> -->
+
+  <!-- start filter buttons -->
+  <div
+    class="tabs d-grid gap-2 d-flex justify-content-center mt-2 mb-3 btn-group "
+    (click)="onButtonGroupClick($event)">
+    <button type="button" (click)="getComplated()" id="complatedBtn"
+      style="width: 120px;" class="btn btn-outline-secondary me-2 "> 
+      Complated :&nbsp;{{complatedCount}}</button>
+    <button type="button" (click)="getProgress()" id="progressBtn"
+      style="width: 120px; " class="btn btn-outline-secondary active  "> 
+      In Progress :&nbsp;{{progressCount}}</button>
+  </div>
+  <!-- end filter button -->
+
+  <!-- start Orders display -->
+  <div
+    class="mx-0 mx-lg-5 mx-md-3  px-1 mx-lg-5 mx-md-3  mx-auto px-auto btn-info">
+    <div class="mx-0 mx-lg-5 mx-md-3  px-1 mx-lg-5 mx-md-3  mx-auto px-auto  ">
+      <div
+        class="mx-0 mx-lg-5 mx-md-3  px-1 mx-lg-5 mx-md-3  mx-auto px-auto btn-info">
+
+        <div
+          class=" table table-hover  bg-light d-flex justify-content-center text-center  row row-cols-1  ">
+          <div id="state_Txt"
+            class="m-2 mx-auto  fw-lighter fs-4">{{state_Txt}}</div>
+          <!-- start order item -->
+
+          @for (o of displayOrders ; track o.id) {
+
+          @for(s of allShipments; track s.id) {
+          @if(o.shipmentID==s.id){
+
+          <div class="my-2 mx-1 mx-lg-3 mx-md-2  mx-auto ">
+            <div class="card ">
+              <div class="card-header bd-primary ">
+                <div class="row row-cols-1 row-cols-lg-2 row-cols-md-2  p-2">
+                  <div class="col col-lg-6  d-flex justify-content-start  fs-5">
+                    <p> Order No. : {{o.id}} </p>
+                  </div>
+                  <div
+                    class="d-flex justify-content-lg-end  justify-content-start col col-lg-6 col-sm-12 fs-5">
+                    <p>Cost : {{s.cost+o.totalPrice}} EGP </p>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body   ">
+                <div class="row row-cols-1 row-cols-lg-2 p-2 p-ms-1">
+                  <p
+                    class="d-flex justify-content-start  col col-lg-6 col-sm-12 fs-6">Placed
+                    Date : {{FormatDate(o.orderDate)}}</p>
+                  <p
+                    class="d-flex justify-content-lg-end  justify-content-start col col-lg-6 col-sm-12 fs-6">Diliver
+                    Date : {{FormatDate(s.date)}}</p>
+                  <p
+                    class="d-flex justify-content-start  col col-lg-2 col-sm-12 fs-6">Address
+                    : </p>
+                  <p
+                    class="d-flex justify-content-start col col-lg-8 col-sm-12 fs-6">{{s.address}}</p>
+                </div>
+                <!-- start Order Details Component -->
+                <!--  -->
+                <div #ordersBody id="details_{{o.id}}" style="display: none;">
+                  <div class="border-top  ">
+
+                    <div
+                      class=" py-3 px-1 px-lg-3 mx-md-2 mx-auto px-auto pb-2 border-bottom">
+                      <div class="row row-cols-1 row-cols-lg-2">
+                        <p
+                          class="d-flex justify-content-start col col-lg-6 col-sm-12 fs-6 fw-bold">
+                          Order Total : EGP {{o.totalPrice}}
+                        </p>
+                        <p
+                          class="d-flex justify-content-lg-end justify-content-start col col-lg-6 col-sm-12 fs-6 fw-bold">
+                          Shipping Cost : EGP {{s.cost}}
+                        </p>
+                        <p
+                          class="d-flex justify-content-start  col col-lg-6 col-sm-12 fs-6">Customer
+                          Phone : {{o.phoneNumber}} </p>
+                      </div>
+                    </div>
+                    <app-order-details [order_ID]="o.id"></app-order-details>
+                  </div>
+                </div>
+                <div #orderrating id="rate_{{o.id}}" class="border-top " style="display: none;">
+                    <div style="text-align: center;"> Rate our Proudct </div>
+                    <app-rating [order_ID]="o.id"  [user_ID]="userId"></app-rating>
+                </div>
+                <!-- end Order Details Component -->
+
+              </div>
+              <div class="card-footer d-grid gap-2 my-2  ">
+
+                <div class="row row-cols-1 row-cols-lg-2 row-cols-md-2">
+                  <div
+                    class=" d-flex justify-content-start ps-1 ps-md-2 ps-lg-4 col col-12 col-lg-9 col-md-6 ">
+                    <!-- start order status -->
+                    @if(o.statue=== "complate"){
+
+                    <div
+                      class=" d-flex justify-content-start col col-2 col-lg-1 col-md-2">
+                      <label class="container" style="width: 40px;">
+                        <input type="checkbox" style="width: 40px;" checked
+                          disabled>
+                        <svg viewBox="0 0 64 64" height="1.6em" width="1.6em">
+                          <path
+                            d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16"
+                            pathLength="575.0541381835938" class="path"></path>
+                        </svg>
+                      </label>
+                    </div>
+                    <div
+                      class=" d-flex justify-content-start pt-1 ps-1 ps-md-2 ps-lg-4 col col-8 fs-6 text-success">
+                      Complated.
+                    </div>
+
+                    }
+                    @else if(o.statue=== "panding"){
+                    <div
+                      class=" d-flex justify-content-start col col-2 col-lg-1 col-md-2">
+                      <label class="container" style="width: 40px;">
+                        <input type="checkbox" style="width: 40px;" disabled>
+                        <svg viewBox="0 0 64 64" height="1.6em" width="1.6em">
+                          <path
+                            d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16"
+                            pathLength="575.0541381835938" class="path"></path>
+                        </svg>
+                      </label>
+                    </div>
+
+                    <div
+                      class=" d-flex justify-content-start pt-1 ps-1 ps-md-2 ps-lg-4 col col-8 fs-6 text-primary">
+                      Please, wait For Owner Acception !!
+                    </div>
+                    }
+                    @else{
+
+                    @if(!s.isCompleted){
+                    <div
+                      class=" d-flex justify-content-start col col-2 col-lg-1 col-md-2">
+                      <label class="container" style="width: 40px;">
+                        <input type="checkbox" style="width: 40px;" disabled>
+                        <svg viewBox="0 0 64 64" height="1.6em" width="1.6em">
+                          <path
+                            d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16"
+                            pathLength="575.0541381835938" class="path"></path>
+                        </svg>
+                      </label>
+                    </div>
+
+                    <div
+                      class=" d-flex justify-content-start pt-1 ps-1 ps-md-2 ps-lg-4 col col-8 fs-6 text-success">
+                      Order on the Way...
+                    </div>
+                    }@else{
+                    <form [formGroup]="checkform" class="row w-100 ">
+
+                      <div
+                        class=" d-flex justify-content-start col col-2 col-lg-1 col-md-2">
+                        <label class="container" style="width: 40px;">
+                          <!-- formControlName="state_active"  -->
+                          <input type="checkbox" style="width: 40px;"
+                            name="state_active"
+                            (change)="changeStateComplete(o.id)">
+                          <svg viewBox="0 0 64 64" height="1.6em" width="1.6em">
+                            <path
+                              d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16"
+                              pathLength="575.0541381835938"
+                              class="path"></path>
+                          </svg>
+                        </label>
+                      </div>
+
+                      <div
+                        class="  d-flex justify-content-start pt-1 ps-1 ps-md-2  col col-10 fs-6 text-danger ">
+
+                        &lt;&lt;=== Please, Ensure that your Order has been
+                        arrived successfully.
+                      </div>
+                    </form>
+                    }
+                    }
+
+                    <!-- end order status -->
+                  </div>
+                  <div
+                    class="d-grid gap-2 d-flex justify-content-end ps-1 ps-md-2 ps-lg-4  col col-12 col-lg-3 col-md-6 ">
+                    <!-- display delete order btn -->
+                    @if(o.statue=== "complate"){
+                    <button
+                      style="width: 70px; height: 1.85em;  font-family: sans-serif;"
+                      class="btn btn-info me-2  d-flex justify-content-center align-items-center "
+                      type="button" id="detailBtn_{{o.id}}"
+                      (click)="getDetails(o.id)">Details</button>
+                    <button
+                      style="width: 70px; height: 1.85em;  font-family: sans-serif; "
+                      class="btn btn-outline-secondary me-2 d-flex justify-content-center align-items-center  "
+                      type="button" id="ratingBtn_{{o.id}}"
+                      (click)="getrateing(o.id)">Rating</button>
+
+                    }
+                    @else if(o.statue=== "panding"){
+                    <button
+                      style="width: 70px; height: 1.85em;  font-family: sans-serif;"
+                      class="btn btn-info me-2  d-flex justify-content-center align-items-center "
+                      type="button" id="detailBtn_{{o.id}}"
+                      (click)="getDetails(o.id)">Details</button>
+                    <button
+                      style="width: 70px; height: 1.85em;  font-family: sans-serif; "
+                      class="btn btn-danger me-2 d-flex justify-content-center align-items-center  "
+                      type="button" (click)="CancelOrder(o.id)">Cancel</button>
+
+                    }
+                    @else{
+
+                    @if(!s.isCompleted){
+                    <button
+                      style="width: 70px; height: 1.85em;  font-family: sans-serif;"
+                      class="btn btn-info me-2  d-flex justify-content-center align-items-center "
+                      type="button" id="detailBtn_{{o.id}}"
+                      (click)="getDetails(o.id)">Details</button>
+                    <button
+                      style="width: 70px; height: 1.85em;  font-family: sans-serif; "
+                      class="btn btn-danger me-2 d-flex justify-content-center align-items-center  "
+                      type="button" (click)="CancelOrder(o.id)">Cancel</button>
+
+                    }@else{
+                    <button
+                      style="width: 70px; height: 1.85em;  font-family: sans-serif;"
+                      class="btn btn-info me-2  d-flex justify-content-center align-items-center  "
+                      type="button" id="detailBtn_{{o.id}}"
+                      (click)="getDetails(o.id)">Details</button>
+                    <button
+                      style="width: 70px; height: 1.85em;  font-family: sans-serif; "
+                      class="btn btn-danger me-2 d-flex justify-content-center align-items-center "
+                      type="button" disabled>Cancel</button>
+
+                    }
+                    }
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          }
+          }
+          }
+
+          <!-- end order item -->
+          <!-- start test  -->
+
+          <!-- end test -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end Orders display -->
+
+</div>
+
+<!--          -->
+

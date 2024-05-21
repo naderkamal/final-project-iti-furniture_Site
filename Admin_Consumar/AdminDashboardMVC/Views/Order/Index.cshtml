@@ -1,0 +1,173 @@
+﻿@model IEnumerable<AdminDashboardMVC.DTO.OrderDTO>
+
+@{
+    ViewData["Title"] = "Index";
+    var statusOptions = new List<SelectListItem>
+    {
+        new SelectListItem { Text = "All", Value = "" },
+        new SelectListItem { Text = "Pending", Value = "panding", Selected = ViewBag.StatusFilter == "panding" },
+        new SelectListItem { Text = "In Progress", Value = "inProgress", Selected = ViewBag.StatusFilter == "inProgress" },
+        new SelectListItem { Text = "Completed", Value = "complate", Selected = ViewBag.StatusFilter == "complate" }
+    };
+    ViewData["Title"] = "Index";
+    int pageNumber = ViewBag.PageNumber;
+    int pageSize = ViewBag.PageSize;
+}
+
+<div class="container mt-5">
+    <h1>Orders</h1>
+
+    @using (Html.BeginForm("Index", "Order", FormMethod.Get))
+    {
+                <!-- Filtering form -->
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                        <label class="form-label">ID:</label>
+                        <input type="number" name="idFilter" value="@ViewBag.IdFilter" class="form-control">
+                    </div>
+
+                    <div class="col-md-3">
+                        <label class="form-label">Shipment ID:</label>
+                        <input type="number" name="shipmentIdFilter" value="@ViewBag.ShipmentIdFilter" class="form-control">
+                    </div>
+
+                    <div class="col-md-3">
+                        <label class="form-label">User ID:</label>
+                        <input type="number" name="userIdFilter" value="@ViewBag.UserIdFilter" class="form-control">
+                    </div>
+
+                    <div class="col-md-3">
+                        <label class="form-label">Total Price:</label>
+                        <input type="text" name="totalPriceFilter" value="@ViewBag.totalPriceFilter" class="form-control">
+                    </div>
+
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                        <label class="form-label">Order Date:</label>
+                        <input type="date" name="orderDateFilter" value="@ViewBag.OrderDateFilter" class="form-control">
+                    </div>
+
+                    <div class="col-md-3">
+                        <label class="form-label">Status:</label>
+                @Html.DropDownList("statusFilter", statusOptions, new { @class = "form-control" })
+                    </div>
+
+                    <div class="col-md-3">
+                        <label class="form-label">Phone Number:</label>
+                        <input type="text" name="phoneNumberFilter" value="@ViewBag.PhoneNumberFilter" class="form-control">
+                    </div>
+
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <button type="submit" class="btn btn-primary">Filter</button>
+                        <a href="@Url.Action("Index", "Order")" class="btn btn-secondary">Reset</a>
+                    </div>
+
+                </div>
+    }
+
+    <!-- Table for displaying orders -->
+    <table class="table table-striped table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Status</th>
+                <th>Total Price</th>
+                <th>Order Date</th>
+                <th>Phone </th>
+                <th>User ID</th>
+                <th>Shipment ID</th>
+                <th style="text-align:center">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    @if (item.Statue == "panding")
+                    {
+                        <td style="background-color:#24e30725; color:#912707; border-bottom: 1px solid #870303f5  ">@Html.DisplayFor(modelItem => item.Id)</td>
+                    }
+                    else
+                    {
+                        <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                     }
+                    <td>@Html.DisplayFor(modelItem => item.Statue) </td>
+                    <td>@Html.DisplayFor(modelItem => item.TotalPrice)</td>
+                    <td>@(item.OrderDate.HasValue ? item.OrderDate.Value.ToString("yyyy-MM-dd") : "")</td>
+                    <td>@Html.DisplayFor(modelItem => item.PhoneNumber)</td>
+                    <td>@Html.DisplayFor(modelItem => item.UserID)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ShipmentID)</td>
+                    <td colspan="2">
+                        <div class="d-flex justify-content-center align-items-center">
+                           
+                        @if (item.Statue == "panding")
+                        {
+                            @Html.ActionLink("Accept", "Accept", new { id = item.Id }, new { @class = "btn btn-outline-success btn-sm me-1 mb-1", style = "width:60px" })
+                            @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-info btn-sm me-1 mb-1", style = "width:60px" })
+                            @using (Html.BeginForm("Delete", "Order", FormMethod.Post, new { id = "deleteForm", onsubmit = $"return confirm('Are you sure you want to dismiss this order ?');" }))
+                            {
+                                @Html.Hidden("id", item.Id)
+                                <button type="submit" class="btn btn-outline-danger btn-sm " style="width:60px">Dismiss</button>
+                            } 
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-warning btn-sm me-1 mb-1", style = "width:60px" })
+                            @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-info btn-sm me-1 mb-1", style = "width:60px" })
+
+                            @using (Html.BeginForm("Delete", "Order", FormMethod.Post, new { id = "deleteForm", onsubmit = $"return confirm('Are you sure you want to delete this order ?');" }))
+                            {
+                                @Html.Hidden("id", item.Id)
+                                <button type="submit" class="btn btn-danger btn-sm   " style="width:60px">Delete</button>
+                            } 
+                        }
+
+                        
+                     </td>
+                 </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div class="container mt-4 d-flex justify-content-center align-items-center">
+    <div class="row justify-content-center">
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                <li class="page-item @(pageNumber == 1 ? "disabled" : "")">
+                    <a class="page-link" href="@Url.Action("Index", "Order", new { pageNumber = 1, pageSize = pageSize, idFilter = ViewBag.IdFilter, statusFilter = ViewBag.StatusFilter, orderDateFilter = ViewBag.OrderDateFilter, userIdFilter = ViewBag.UserIdFilter, shipmentIdFilter = ViewBag.ShipmentIdFilter, phoneNumberFilter = ViewBag.PhoneNumberFilter, totalPriceFilter = ViewBag.TotalPriceFilter })" aria-label="First">
+                        <span aria-hidden="true">&laquo;&laquo;</span>
+                        <span class="sr-only">First</span>
+                    </a>
+                </li>
+                <li class="page-item @(pageNumber == 1 ? "disabled" : "")">
+                    <a class="page-link" href="@Url.Action("Index", "Order", new { pageNumber = pageNumber - 1, pageSize = pageSize, idFilter = ViewBag.IdFilter, statusFilter = ViewBag.StatusFilter, orderDateFilter = ViewBag.OrderDateFilter, userIdFilter = ViewBag.UserIdFilter, shipmentIdFilter = ViewBag.ShipmentIdFilter, phoneNumberFilter = ViewBag.PhoneNumberFilter, totalPriceFilter = ViewBag.TotalPriceFilter })" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+
+                <li class="page-item active">
+                    <span class="page-link">@pageNumber</span>
+                </li>
+
+                <li class="page-item @(pageNumber == ViewBag.TotalPages ? "disabled" : "")">
+                    <a class="page-link" href="@Url.Action("Index", "Order", new { pageNumber = pageNumber + 1, pageSize = pageSize, idFilter = ViewBag.IdFilter, statusFilter = ViewBag.StatusFilter, orderDateFilter = ViewBag.OrderDateFilter, userIdFilter = ViewBag.UserIdFilter, shipmentIdFilter = ViewBag.ShipmentIdFilter, phoneNumberFilter = ViewBag.PhoneNumberFilter, totalPriceFilter = ViewBag.TotalPriceFilter })" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </li>
+                <li class="page-item @(pageNumber == ViewBag.TotalPages ? "disabled" : "")">
+                    <a class="page-link" href="@Url.Action("Index", "Order", new { pageNumber = ViewBag.TotalPages, pageSize = pageSize, idFilter = ViewBag.IdFilter, statusFilter = ViewBag.StatusFilter, orderDateFilter = ViewBag.OrderDateFilter, userIdFilter = ViewBag.UserIdFilter, shipmentIdFilter = ViewBag.ShipmentIdFilter, phoneNumberFilter = ViewBag.PhoneNumberFilter, totalPriceFilter = ViewBag.TotalPriceFilter })" aria-label="Last">
+                        <span aria-hidden="true">&raquo;&raquo;</span>
+                        <span class="sr-only">Last</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>

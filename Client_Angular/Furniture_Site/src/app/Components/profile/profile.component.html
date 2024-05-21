@@ -1,0 +1,366 @@
+<div class="my-5">
+  @if(originalUser){
+
+  <div class="container" style="margin-top: 130px">
+    <div class="border my-5 border-1 rounded-3 shadow-sm p-2">
+      <div class="row min-h-100">
+        <div class="col-12 col-md-6 mb-2 mb-md-0">
+          <div class="">
+            <div class="d-flex justify-content-between w-100">
+              <h3>Profile Details</h3>
+              <div class="gap-3 d-flex">
+                <button
+                  class="btn btn-primary"
+                  (click)="saveProfile()"
+                  *ngIf="isEditableProfile"
+                >
+                  Save
+                </button>
+                <button
+                  class="btn btn-success"
+                  (click)="openEditMode('profile')"
+                  *ngIf="!isEditableProfile"
+                >
+                  Edit
+                </button>
+                <button
+                  class="btn btn-secondary"
+                  (click)="cancelEditMode('profile')"
+                  *ngIf="isEditableProfile"
+                >
+                  cancel
+                </button>
+              </div>
+            </div>
+            <div class="">
+              <div class="mb-3">
+                <label for="fname" class="form-label fw-semibold"
+                  >First Name</label
+                >
+                <input
+                  class="text-black-50"
+                  name="firstName"
+                  [(ngModel)]="originalUser.firstName"
+                  [readonly]="!isEditableProfile"
+                  value="{{ originalUser.firstName }}"
+                  [class.form-control]="isEditableProfile"
+                  [class.readonlyClass]="!isEditableProfile"
+                  id="fname"
+                  #fname="ngModel"
+                  required
+                  minlength="3"
+                  maxlength="20"
+                  pattern="[a-zA-Z]+"
+                />
+              </div>
+              <div
+                class="form-label d-flex justify-content-start ps-2 text-danger"
+                *ngIf="fname.errors?.['minlength'] && (fname.dirty || fname.touched)"
+              >
+                First Name must be at least 3 characters long.
+              </div>
+              <div
+                class="form-label d-flex justify-content-start ps-2 text-danger"
+                *ngIf="fname.errors?.['maxlength'] && (fname.dirty || fname.touched)"
+              >
+                First Name must be at most 20 characters long.
+              </div>
+              <div
+                class="form-label d-flex justify-content-start ps-2 text-danger"
+                *ngIf="fname.errors?.['pattern'] && (fname.dirty || fname.touched)"
+              >
+                First Name must be only letters.
+              </div>
+              <div
+                class="form-label d-flex justify-content-start ps-2 text-danger"
+                *ngIf="fname.errors?.['required'] && (fname.dirty || fname.touched)"
+              >
+                First Name is required.
+              </div>
+
+              <div class="mb-3">
+                <label for="lname" class="form-label fw-semibold"
+                  >Last Name</label
+                >
+                <input
+                  class="text-black-50"
+                  value="{{ originalUser.lastName }}"
+                  name="lname"
+                  [(ngModel)]="originalUser.lastName"
+                  [readonly]="!isEditableProfile"
+                  [class.form-control]="isEditableProfile"
+                  [class.readonlyClass]="!isEditableProfile"
+                  id="lname"
+                  #lname="ngModel"
+                  required
+                  minlength="3"
+                  maxlength="20"
+                  pattern="[a-zA-Z]+"
+                />
+              </div>
+              <div
+                class="form-label d-flex justify-content-start ps-2 text-danger"
+                *ngIf="lname.errors?.['minlength'] && (lname.dirty || lname.touched)"
+              >
+                Last Name must be at least 3 characters long.
+              </div>
+              <div
+                class="form-label d-flex justify-content-start ps-2 text-danger"
+                *ngIf="lname.errors?.['maxlength'] && (lname.dirty || lname.touched)"
+              >
+                Last Name must be at most 20 characters long.
+              </div>
+              <div
+                class="form-label d-flex justify-content-start ps-2 text-danger"
+                *ngIf="lname.errors?.['pattern'] && (lname.dirty || lname.touched)"
+              >
+                Last Name must be only letters.
+              </div>
+              <div
+                class="form-label d-flex justify-content-start ps-2 text-danger"
+                *ngIf="lname.errors?.['required'] && (lname.dirty || lname.touched)"
+              >
+                Last Name is required.
+              </div>
+
+              <div class="mb-3">
+                <label for="age" class="form-label fw-semibold">Age</label>
+                <input
+                  class="text-black-50"
+                  value="{{ originalUser.age }}"
+                  name="age"
+                  [(ngModel)]="originalUser.age"
+                  [readonly]="!isEditableProfile"
+                  [class.form-control]="isEditableProfile"
+                  [class.readonlyClass]="!isEditableProfile"
+                  id="age"
+                  type="number"
+                  #age="ngModel"
+                  required
+                  min="18"
+                  max="120"
+                  pattern="[0-9]+"
+                />
+              </div>
+              <div
+                class="form-label d-flex justify-content-start ps-2 text-danger"
+                *ngIf="age.errors?.['required'] && (age.dirty || age.touched)"
+              >
+                Age is required.
+              </div>
+              <div
+                class="form-label d-flex justify-content-start ps-2 text-danger"
+                *ngIf="(age.errors?.['min'] || age.errors?.['max']) && (age.dirty || age.touched)"
+              >
+                Age must be between 18 and 100.
+              </div>
+              <div
+                class="form-label d-flex justify-content-start ps-2 text-danger"
+                *ngIf="age.errors?.['pattern'] && (age.dirty || age.touched)"
+              >
+                Age must be numbers.
+              </div>
+
+              <div class="mb-3">
+                <label for="email" class="form-label fw-semibold">Email</label>
+                <input
+                  class="text-black-50"
+                  value="{{ originalUser.email }}"
+                  name="email"
+                  [(ngModel)]="originalUser.email"
+                  [readonly]="!isEditableProfile"
+                  [class.form-control]="isEditableProfile"
+                  [class.readonlyClass]="!isEditableProfile"
+                  id="email"
+                  #email="ngModel"
+                  required
+                  email
+                />
+              </div>
+              <div
+                class="form-label d-flex justify-content-start ps-2 text-danger"
+                *ngIf="email.errors?.['required'] && (email.dirty || email.touched)"
+              >
+                Email is required.
+              </div>
+              <div
+                class="form-label d-flex justify-content-start ps-2 text-danger"
+                *ngIf="email.errors?.['email'] && (email.dirty || email.touched)"
+              >
+                Invalid email format.
+              </div>
+
+              <div class="mb-3">
+                <label for="phone" class="form-label fw-semibold"
+                  >Phone No.</label
+                >
+                <input
+                  class="text-black-50"
+                  value="{{ originalUser.phoneNumber }}"
+                  name="phone"
+                  [(ngModel)]="originalUser.phoneNumber"
+                  [readonly]="!isEditableProfile"
+                  [class.form-control]="isEditableProfile"
+                  [class.readonlyClass]="!isEditableProfile"
+                  id="phone"
+                  #phone="ngModel"
+                  required
+                  pattern="^(010|011|012)[0-9]{8}$"
+                />
+              </div>
+              <div
+                class="form-label d-flex justify-content-start ps-2 text-danger"
+                *ngIf="phone.errors?.['required'] && (phone.dirty || phone.touched)"
+              >
+                phone required
+              </div>
+              <div
+                class="form-label d-flex justify-content-start ps-2 text-danger"
+                *ngIf="phone.errors?.['pattern'] && (phone.dirty || phone.touched)"
+              >
+                Invalid Phone format
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="col-12 col-md-6 d-flex justify-content-between flex-column h-100"
+        >
+          <div class="">
+            <div class="d-flex justify-content-between w-100">
+              <h3>Shipping Data</h3>
+              <div class="gap-3 d-flex">
+                <button
+                  class="btn btn-primary"
+                  (click)="saveProfile()"
+                  *ngIf="isEditableAddress"
+                >
+                  Save
+                </button>
+                <button
+                  class="btn btn-success"
+                  (click)="openEditMode('address')"
+                  *ngIf="!isEditableAddress"
+                >
+                  Edit
+                </button>
+                <button
+                  class="btn btn-secondary"
+                  (click)="cancelEditMode('address')"
+                  *ngIf="isEditableAddress"
+                >
+                  cancel
+                </button>
+              </div>
+            </div>
+            <div class="">
+              <div class="mb-3">
+                <label for="street" class="form-label fw-semibold"
+                  >Street</label
+                >
+                <input
+                  class="text-black-50"
+                  name="street"
+                  [(ngModel)]="originalUser.street"
+                  [readonly]="!isEditableAddress"
+                  value="{{ originalUser.street }}"
+                  [class.form-control]="isEditableAddress"
+                  [class.readonlyClass]="!isEditableAddress"
+                  id="street"
+                  #street="ngModel"
+                  required
+                  pattern="^(?=.*[a-zA-Z])[a-zA-Z0-9 ]+$"
+                />
+              </div>
+              <div
+                class="form-label d-flex justify-content-start ps-2 text-danger"
+                *ngIf="street.errors?.['required'] && (street.dirty || street.touched)"
+              >
+                street is required
+              </div>
+              <div
+                class="form-label d-flex justify-content-start ps-2 text-danger"
+                *ngIf="street.errors?.['pattern'] && (street.dirty || street.touched)"
+              >
+                street should contain letters and without special characters
+              </div>
+
+              <div class="mb-3">
+                <label for="city" class="form-label fw-semibold">City</label>
+                <input
+                  class="text-black-50"
+                  name="city"
+                  [(ngModel)]="originalUser.city"
+                  [readonly]="!isEditableAddress"
+                  value="{{ originalUser.city }}"
+                  [class.form-control]="isEditableAddress"
+                  [class.readonlyClass]="!isEditableAddress"
+                  id="city"
+                  #city="ngModel"
+                  required
+                  pattern="^(?=.*[a-zA-Z])[a-zA-Z0-9 ]+$"
+                />
+              </div>
+              <div
+                class="form-label d-flex justify-content-start ps-2 text-danger"
+                *ngIf="city.errors?.['required'] && (city.dirty || city.touched)"
+              >
+                city is required
+              </div>
+              <div
+                class="form-label d-flex justify-content-start ps-2 text-danger"
+                *ngIf="city.errors?.['pattern'] && (city.dirty || city.touched)"
+              >
+                city should contain letters and without special characters
+              </div>
+              <div class="mb-3">
+                <label for="governorate" class="form-label fw-semibold"
+                  >Governorate</label
+                >
+                <input
+                  class="text-black-50"
+                  name="governorate"
+                  [(ngModel)]="originalUser.governorate"
+                  [readonly]="!isEditableAddress"
+                  value="{{ originalUser.governorate }}"
+                  [class.form-control]="isEditableAddress"
+                  [class.readonlyClass]="!isEditableAddress"
+                  id="governorate"
+                  #governorate="ngModel"
+                  required
+                  pattern="^(?=.*[a-zA-Z])[a-zA-Z0-9 ]+$"
+                />
+              </div>
+              <div
+                class="form-label d-flex justify-content-start ps-2 text-danger"
+                *ngIf="governorate.errors?.['required'] && (governorate.dirty || governorate.touched)"
+              >
+                governorate is required
+              </div>
+              <div
+                class="form-label d-flex justify-content-start ps-2 text-danger"
+                *ngIf="governorate.errors?.['pattern'] && (governorate.dirty || governorate.touched)"
+              >
+                governorate should contain letters and without special
+                characters
+              </div>
+            </div>
+            <!-- Add your shipping data here -->
+          </div>
+          <button
+            (click)="deleteUser()"
+            class="btn btn-danger w-100 d-block mt-100"
+          >
+            Delete Your Account
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  }@else {
+  <div class="alert alert-success">
+    <h1>Loading..</h1>
+  </div>
+  }
+</div>

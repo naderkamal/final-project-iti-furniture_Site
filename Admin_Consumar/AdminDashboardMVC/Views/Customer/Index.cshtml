@@ -1,0 +1,237 @@
+﻿@model IEnumerable<AdminDashboardMVC.DTO.Users>
+
+@{
+    ViewData["Title"] = "Index";
+    int pageNumber = ViewBag.PageNumber;
+    int pageSize = ViewBag.PageSize;
+}
+
+<div class="container mt-5">
+    @{
+        if (@TempData["CreateUser"] != null)
+        {
+            <div class="alert alert-dismissible alert-success">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                <h4 class="alert-heading">Created!</h4>
+                <p class="mb-0">@TempData["CreateUser"] was created successfully</p>
+            </div>
+        }
+
+    }
+
+    @{
+        if (@TempData["UpdateUser"] != null)
+        {
+            <div class="alert alert-dismissible alert-warning">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                <h4 class="alert-heading">Updated!</h4>
+                <p class="mb-0">@TempData["UpdateUser"] was updated successfully</p>
+            </div>
+        }
+
+    }
+    <h1>users</h1>
+    @using (Html.BeginForm("Index", "Customer", FormMethod.Get))
+    {
+        <div class="row">
+
+            <div class="col-md-4">
+                <label class="form-label">City:</label>
+                <input type="text" name="cityFilter" value="@ViewBag.CityFilter" class="form-control">
+            </div>
+
+
+            <div class="col-md-4">
+                <label class="form-label">Name:</label>
+                <input type="text" name="nameFilter" value="@ViewBag.NameFilter" class="form-control">
+            </div>
+
+            <div class="col-md-4">
+                <label class="form-label">Phone:</label>
+                <input type="text" name="phoneFilter" value="@ViewBag.PhoneFilter" class="form-control">
+            </div>
+        </div>
+
+
+        <div class="col-md-3">
+            @{
+                var RoleOptions = new List<SelectListItem>
+        {
+        new SelectListItem { Text = "customer", Value = "customer" },
+        new SelectListItem { Text = "admin", Value = "admin" },
+        new SelectListItem { Text = "assistant", Value = "assistant" },
+        new SelectListItem { Text = "shipman", Value = "shipman" },
+        new SelectListItem { Text = "All", Value = "" }
+        };
+            }
+        </div>
+        <div class="mt-3">
+            <label>Role:</label>
+            @Html.DropDownList("roleFilter", RoleOptions, new { @class = "form-control" })
+        </div>
+
+        <div class="d-flex my-3 justify-content-between ">
+            <div class="d-flex gap-3">
+                <button type="submit" class="btn btn-primary">Filter</button>
+                <a href="@Url.Action("Index", "Customer")" class="btn btn-secondary">Reset</a>
+            </div>
+
+            <a href="@Url.Action("Create", "Customer")" class="btn btn-success">Create</a>
+
+        </div>
+
+
+    }
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="text-center">
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th class="text-center">
+                    Name
+                </th>
+
+                <th class="text-center">
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+
+                <th class="text-center">
+                    @Html.DisplayNameFor(model => model.PhoneNumber)
+                </th>
+                <th class="text-center">
+                    @Html.DisplayNameFor(model => model.Age)
+                </th>
+                <th class="text-center">
+                    Address
+                </th>
+                <th class="text-center">
+                    @Html.DisplayNameFor(model => model.Role)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.PhoneNumber)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.Age)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.Street), @Html.DisplayFor(modelItem => item.City), @Html.DisplayFor(modelItem => item.Governorate)
+                    </td>
+
+
+                    @if (item.Role == null)
+                    {
+                        <td class="text-center">
+                            customer
+                        </td>
+                    }
+                    else
+                    {
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.Role)
+                        </td>
+                    }
+
+
+                    <td>
+                        @if (item.Role == null)
+                        {
+                            <div class="d-flex justify-content-end align-items-center">
+                                <div class="me-2">
+                                    @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-info " })
+                                </div>
+                                @using (Html.BeginForm("Delete", "Customer", FormMethod.Post, new { id = "deleteForm", onsubmit = $"return confirm('Are you sure you want to delete {item.FirstName} {item.LastName}?');" }))
+                            {
+                                @Html.Hidden("id", item.Id)
+                                <button type="submit" class="btn btn-danger  me-1 d-flex justify-content-center align-items-center">Delete</button>
+                            }
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="d-flex justify-content-end align-items-center">
+                                <div class="me-2">
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-warning" })
+                                </div>
+                                <div class="me-2">
+                                    @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-info" })
+                                </div>
+                                @using (Html.BeginForm("Delete", "Customer", FormMethod.Post, new { id = "deleteForm", onsubmit = $"return confirm('Are you sure you want to delete {item.FirstName} {item.LastName}?');" }))
+                                {
+                                    @Html.Hidden("id", item.Id)
+                                    <button type="submit" class="btn btn-danger  me-1 d-flex justify-content-center align-items-center">Delete</button>
+                                }
+                            </div>
+                        }
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                <li class="page-item @(pageNumber == 1 ? "disabled" : "")">
+                    <a class="page-link" href="@Url.Action("Index", "Customer", new { pageNumber = 1, pageSize = pageSize, nameFilter = ViewBag.NameFilter, roleFilter = ViewBag.RoleFilter, phoneFilter = ViewBag.PhoneFilter, cityFilter = ViewBag.CityFilter})" aria-label="First">
+                        <span aria-hidden="true">&laquo;&laquo;</span>
+                        <span class="sr-only">First</span>
+                    </a>
+                </li>
+                <li class="page-item @(pageNumber == 1 ? "disabled" : "")">
+                    <a class="page-link" href="@Url.Action("Index", "Customer", new { pageNumber = pageNumber - 1, pageSize = pageSize,  nameFilter = ViewBag.NameFilter, roleFilter = ViewBag.RoleFilter, phoneFilter = ViewBag.PhoneFilter, cityFilter = ViewBag.CityFilter})" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+
+                <li class="page-item active">
+                    <span class="page-link">@pageNumber</span>
+                </li>
+
+                <li class="page-item @(pageNumber == ViewBag.TotalPages ? "disabled" : "")">
+                    <a class="page-link" href="@Url.Action("Index", "Customer", new { pageNumber = pageNumber + 1, pageSize = pageSize,  nameFilter = ViewBag.NameFilter, roleFilter = ViewBag.RoleFilter, phoneFilter = ViewBag.PhoneFilter, cityFilter = ViewBag.CityFilter})" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </li>
+                <li class="page-item @(pageNumber == ViewBag.TotalPages ? "disabled" : "")">
+                    <a class="page-link" href="@Url.Action("Index", "Customer", new { pageNumber = ViewBag.TotalPages, pageSize = pageSize,  nameFilter = ViewBag.NameFilter, roleFilter = ViewBag.RoleFilter, phoneFilter = ViewBag.PhoneFilter, cityFilter = ViewBag.CityFilter})" aria-label="Last">
+                        <span aria-hidden="true">&raquo;&raquo;</span>
+                        <span class="sr-only">Last</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>

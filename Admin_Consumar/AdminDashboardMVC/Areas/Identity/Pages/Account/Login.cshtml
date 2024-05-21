@@ -1,0 +1,153 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Log in";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] </title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link href="~/css/styles.css" rel="stylesheet" />
+    @*     <link rel="stylesheet" href="~/AdminDashboardMVC.styles.css" asp-append-version="true" />
+    *@
+    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+    <style type="text/css">
+        button {
+            border-radius: 0px;
+        }
+
+        form {
+            width: 30rem;
+        }
+
+       
+
+        /* ------------------- */
+        img {
+            max-height: inherit;
+            transition-duration: 1s;
+        }
+
+        #card {
+            border: 0px;
+            overflow: hidden;
+        }
+
+            #card:hover #img img {
+                transform: scale(1.04);
+                opacity: 0.8;
+            }
+
+        label {
+            margin-top: 10px;
+            font-size: 0.8rem;
+        }
+    </style>
+
+</head>
+<body >
+   
+    <div class="text-center m-3"> <h1>Login</h1>  </div>
+@* 
+    <div class="container d-flex justify-content-center align-items-center" style="min-height: 70vh;">
+
+        <div class="shadow p-4 col-7 mt-auto">
+            <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+
+            <label for="floatingInput">username address</label>
+            <div class="form-floating">
+                <input [(ngModel)]="email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+            </div>
+
+            <label for="floatingPassword">Password</label>
+            <div class="form-floating mt-2">
+                <input [(ngModel)]="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
+            </div>
+
+            <div class="form-check text-start my-3">
+                <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault" style="cursor: pointer">
+                    Remember me
+                </label>
+            </div>
+
+            <div class="form-floating mt-2 mb-3" style="cursor: pointer;">
+                Don't have an account, <a><strong>Register</strong></a>
+            </div>
+
+            <button class="btn btn-dark text-white w-100 py-3" (click)="login()" type="submit">
+                <i class="bi bi-check-circle-fill"> Log in</i>
+            </button>
+        </div>
+
+    </div>
+ *@
+
+    <div id="layoutSidenav" >
+
+        <div id="layoutSidenav_content">
+            <div class="container">
+                <main role="main" class="pb-3">
+                    <div class="row d-flex justify-content-center align-content-center">
+                        <div class="col-md-4 d-flex justify-content-center ">
+                            <section class="d-flex justify-content-center">
+                                <form id="account" method="post" class=" p-3 px-5" style="box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;">
+                                    <h2 class="fs-5 "  >Use your account email or user name to log in.</h2>
+                                    <hr />
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                    <div class="form-floating mb-3 fs-6">
+                                        <input asp-for="Input.Email" class="form-control fs-6" autocomplete="username" aria-required="true" />
+                                        <label asp-for="Input.Email" class="form-label fs-6"></label>
+                                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-floating">
+                                        <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" />
+                                        <label asp-for="Input.Password" class="form-label"></label>
+                                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                                    </div>
+                                    <div>
+                                        <div class="checkbox">
+                                            <label asp-for="Input.RememberMe" class="form-label">
+                                                <input class="form-check-input" asp-for="Input.RememberMe" />
+                                                @Html.DisplayNameFor(m => m.Input.RememberMe)
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Log in</button>
+                                    </div>
+                                    <div>
+                                        <p>
+                                            <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
+                                        </p>
+
+                                    </div>
+                                </form>
+                            </section>
+                        </div>
+                    </div>
+
+                </main>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="~/js/scripts.js"></script>
+
+
+</body>
+</html>
+

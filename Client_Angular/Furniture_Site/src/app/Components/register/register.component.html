@@ -1,0 +1,417 @@
+<div class="form-bg mt-3 pt-3"  >
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-md-8 mx-auto my-3">
+        <div class="form-container border rounded-3 p-4" style="box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;">
+          <h3 class="title mb-2 pb-1 text-center">Register</h3>
+          <form
+            [formGroup]="form"
+            (ngSubmit)="onSubmit()"
+            class="form-horizontal"
+          >
+            <div class="row">
+              <div class="form-group mb-1 col-12 col-md-6">
+                <label>First Name</label>
+                <input
+                  formControlName="firstName"
+                  type="text"
+                  class="form-control"
+                  placeholder="First Name"
+                  [ngClass]="{
+                    'is-invalid': submitted && f['firstName'].errors
+                  }"
+                />
+                @if (submitted && f['firstName'].errors) {
+                <div class="invalid-feedback">
+                  @if (f['firstName'].errors['required']) {
+                  <div>First Name is required</div>
+                  } @if (f['firstName'].errors['minlength']) {
+                  <div>First Name must be at least 3 characters</div>
+                  } @if (f['firstName'].errors['maxlength']) {
+                  <div>First Name must not exceed 20 characters</div>
+                  }@if (f['firstName'].errors['pattern']) {
+                  <div>First Name must be only characters</div>
+                  }
+                </div>
+                }
+              </div>
+
+              <div class="form-group mb-1 col-12 col-md-6">
+                <label>Last Name</label>
+                <input
+                  formControlName="lastName"
+                  type="text"
+                  class="form-control"
+                  placeholder="Last Name"
+                  [ngClass]="{
+                    'is-invalid': submitted && f['lastName'].errors
+                  }"
+                />
+                @if (submitted && f['lastName'].errors) {
+                <div class="invalid-feedback">
+                  @if (f['lastName'].errors['required']) {
+                  <div>Last Name is required</div>
+                  } @if (f['lastName'].errors['minlength']) {
+                  <div>Last Name must be at least 3 characters</div>
+                  } @if (f['lastName'].errors['maxlength']) {
+                  <div>Last Name must not exceed 20 characters</div>
+                  }@if (f['lastName'].errors['pattern']) {
+                  <div>Last Name must be only characters</div>
+                  }
+                </div>
+                }
+              </div>
+
+              <div class="form-group mb-1 col-12 col-md-6">
+                <label>Email</label>
+                <input
+                  formControlName="email"
+                  type="email"
+                  class="form-control"
+                  placeholder="Email Address"
+                  [ngClass]="{ 'is-invalid': submitted && f['email'].errors }"
+                />
+                @if (submitted && f['email'].errors) {
+                <div class="invalid-feedback">
+                  @if (f['email'].errors['required']) {
+                  <div>Email is required</div>
+                  } @if (f['email'].errors['email']) {
+                  <div>Email is invalid</div>
+                  }
+                </div>
+                }
+              </div>
+
+              <div class="form-group mb-1 col-12 col-md-6">
+                <label>SSN</label>
+                <input
+                  formControlName="ssn"
+                  type="text"
+                  class="form-control"
+                  placeholder="SSN"
+                  [ngClass]="{ 'is-invalid': submitted && f['ssn'].errors }"
+                />
+                @if (submitted && f['ssn'].errors) {
+                <div class="invalid-feedback">
+                  @if (f['ssn'].errors['required']) {
+                  <div>SSN is required</div>
+                  }@if (f['ssn'].errors['minLength']) {
+                  <div>SSN can't be less than 14 digits</div>
+                  }@if (f['ssn'].errors['maxLength']) {
+                  <div>SSN can't be more than 14 digits</div>
+                  }@if (f['ssn'].errors['pattern']) {
+                  <div>SSN must be 14 digits</div>
+                  }
+                </div>
+                }
+              </div>
+
+              <div class="form-group mb-1 col-12 col-md-6">
+                <label>Password</label>
+                <input
+                  formControlName="password"
+                  type="password"
+                  class="form-control"
+                  placeholder="Password"
+                  [ngClass]="{
+                    'is-invalid': submitted && f['password'].errors
+                  }"
+                />
+                @if (submitted && f['password'].errors) {
+                <div class="invalid-feedback">
+                  @if (f['password'].errors['required']) {
+                  <div>Password is required</div>
+                  } @if (f['password'].errors['minlength']) {
+                  <div>Password must be at least 8 characters</div>
+                  } @if (f['password'].errors['maxlength']) {
+                  <div>Password must not exceed 40 characters</div>
+                  }
+                </div>
+                }
+              </div>
+
+              <div class="form-group mb-1 col-12 col-md-6">
+                <label>Confirm Password</label>
+                <input
+                  formControlName="confirmPassword"
+                  type="password"
+                  class="form-control"
+                  placeholder="Confirm Password"
+                  [ngClass]="{
+                    'is-invalid': submitted && f['confirmPassword'].errors
+                  }"
+                />
+                @if (submitted && f['confirmPassword'].errors) {
+                <div class="invalid-feedback">
+                  @if (f['confirmPassword'].errors['required']) {
+                  <div>Confirm Password is required</div>
+                  } @if (f['confirmPassword'].errors['matching']) {
+                  <div>Confirm Password does not match</div>
+                  }
+                </div>
+                }
+              </div>
+            </div>
+
+            <h4 class="sub-title mt-2 mb-2">Personal Information</h4>
+            <div class="row">
+              <div class="form-group mb-1 col-12 col-md-6">
+                <label>Age</label>
+                <input
+                  formControlName="age"
+                  type="number"
+                  class="form-control"
+                  placeholder="Age"
+                  [ngClass]="{ 'is-invalid': submitted && f['age'].errors }"
+                />
+                @if (submitted && f['age'].errors) {
+                <div class="invalid-feedback">
+                  @if (f['age'].errors['required']) {
+                  <div>Age is required</div>
+                  } @if (f['age'].errors['minlength']) {
+                  <div>Age must be at least 6 characters</div>
+                  } @if (f['age'].errors['maxlength']) {
+                  <div>Age must not exceed 20 characters</div>
+                  } @if (f['age'].errors['pattern']) {
+                  <div>Age must be numbers</div>
+                  }
+                </div>
+                }
+              </div>
+
+              <div class="form-group mb-1 col-12 col-md-6">
+                <label>Phone No.</label>
+                <input
+                  formControlName="phoneNumber"
+                  type="text"
+                  class="form-control"
+                  placeholder="Phone Number"
+                  [ngClass]="{
+                    'is-invalid': submitted && f['phoneNumber'].errors
+                  }"
+                />
+                @if (submitted && f['phoneNumber'].errors) {
+                <div class="invalid-feedback">
+                  @if (f['phoneNumber'].errors['required']) {
+                  <div>Phone Number is required</div>
+                  } @if (f['phoneNumber'].errors['pattern']) {
+                  <div>Invalid Phone Number</div>
+                  }
+                </div>
+                }
+              </div>
+            </div>
+
+            <h4 class="sub-title mt-2 mb-2">default shipping address</h4>
+            <div class="row">
+              <div class="form-group mb-1 col-12 col-md-6">
+                <label>Street</label>
+                <input
+                  formControlName="street"
+                  type="text"
+                  class="form-control"
+                  placeholder="Street"
+                  [ngClass]="{ 'is-invalid': submitted && f['street'].errors }"
+                />
+                @if (submitted && f['street'].errors) {
+                <div class="invalid-feedback">
+                  @if (f['street'].errors['required']) {
+                  <div>Street is required</div>
+                  } @if (f['street'].errors['pattern']) {
+                  <div>Street should contains characters and numbers</div>
+                  }
+                </div>
+                }
+              </div>
+
+              <div class="form-group mb-1 col-12 col-md-6">
+                <label>City</label>
+                <input
+                  formControlName="city"
+                  type="text"
+                  class="form-control"
+                  placeholder="City"
+                  [ngClass]="{ 'is-invalid': submitted && f['city'].errors }"
+                />
+                @if (submitted && f['city'].errors) {
+                <div class="invalid-feedback">
+                  @if (f['city'].errors['required']) {
+                  <div>City is required</div>
+                  }@if (f['city'].errors['pattern']) {
+                  <div>City should contains characters and numbers</div>
+                  }
+                </div>
+                }
+              </div>
+
+              <div class="form-group mb-1 col-12 col-md-6">
+                <label>Governorate</label>
+                <input
+                  formControlName="governorate"
+                  type="text"
+                  class="form-control"
+                  placeholder="Governorate"
+                  [ngClass]="{
+                    'is-invalid': submitted && f['governorate'].errors
+                  }"
+                />
+                @if (submitted && f['governorate'].errors) {
+                <div class="invalid-feedback">
+                  @if (f['governorate'].errors['required']) {
+                  <div>Governorate is required</div>
+                  } @if (f['governorate'].errors['pattern']) {
+                  <div>Governorate should contains characters and numbers</div>
+                  }
+                </div>
+                }
+              </div>
+            </div>
+
+            <span class="signin-link" >Already have an account? Click here to &nbsp;  <a href="/login" >Login</a></span>
+            <div class="d-flex gap-2 mt-2">
+              <button type="submit" (click)="AddUser()" class="btn btn-primary">
+                Register
+              </button>
+              <button
+                type="button"
+                (click)="onReset()"
+                class="btn btn-secondary float-right"
+              >
+                Reset
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--
+<div class="register-form">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label>Full Name</label>
+      <input
+        type="text"
+        formControlName="fullname"
+        class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f['fullname'].errors }"
+      />
+      @if (submitted && f['fullname'].errors) {
+      <div class="invalid-feedback">
+        @if (f['fullname'].errors['required']) {
+        <div>Fullname is required</div>
+        }
+      </div>
+      }
+    </div>
+
+    <div class="form-group">
+      <label>Username</label>
+      <input
+        type="text"
+        formControlName="username"
+        class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f['username'].errors }"
+      />
+      @if (submitted && f['username'].errors) {
+      <div class="invalid-feedback">
+        @if (f['username'].errors['required']) {
+        <div>Username is required</div>
+        } @if (f['username'].errors['minlength']) {
+        <div>Username must be at least 6 characters</div>
+        } @if (f['username'].errors['maxlength']) {
+        <div>Username must not exceed 20 characters</div>
+        }
+      </div>
+      }
+    </div>
+
+    <div class="form-group">
+      <label>Email</label>
+      <input
+        type="text"
+        formControlName="email"
+        class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f['email'].errors }"
+      />
+      @if (submitted && f['email'].errors) {
+      <div class="invalid-feedback">
+        @if (f['email'].errors['required']) {
+        <div>Email is required</div>
+        } @if (f['email'].errors['email']) {
+        <div>Email is invalid</div>
+        }
+      </div>
+      }
+    </div>
+
+    <div class="form-group">
+      <label>Password</label>
+      <input
+        type="password"
+        formControlName="password"
+        class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f['password'].errors }"
+      />
+      @if (submitted && f['password'].errors) {
+      <div class="invalid-feedback">
+        @if (f['password'].errors['required']) {
+        <div>Password is required</div>
+        } @if (f['password'].errors['minlength']) {
+        <div>Password must be at least 6 characters</div>
+        } @if (f['password'].errors['maxlength']) {
+        <div>Username must not exceed 40 characters</div>
+        }
+      </div>
+      }
+    </div>
+
+    <div class="form-group">
+      <label>Confirm Password</label>
+      <input
+        type="password"
+        formControlName="confirmPassword"
+        class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f['confirmPassword'].errors }"
+      />
+      @if (submitted && f['confirmPassword'].errors) {
+      <div class="invalid-feedback">
+        @if (f['confirmPassword'].errors['required']) {
+        <div>Confirm Password is required</div>
+        } @if (f['confirmPassword'].errors['matching']) {
+        <div>Confirm Password does not match</div>
+        }
+      </div>
+      }
+    </div>
+
+    <div class="form-group form-check">
+      <input
+        type="checkbox"
+        formControlName="acceptTerms"
+        class="form-check-input"
+        [ngClass]="{ 'is-invalid': submitted && f['acceptTerms'].errors }"
+      />
+      <label for="acceptTerms" class="form-check-label">
+        I have read and agree to the Terms
+      </label>
+      @if (submitted && f['acceptTerms'].errors) {
+      <div class="invalid-feedback">Accept Terms is required</div>
+      }
+    </div>
+
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">Register</button>
+      <button
+        type="button"
+        (click)="onReset()"
+        class="btn btn-warning float-right"
+      >
+        Reset
+      </button>
+    </div>
+  </form>
+</div>
+-->

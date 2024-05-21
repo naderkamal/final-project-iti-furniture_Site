@@ -1,0 +1,51 @@
+.filter {
+    cursor: pointer;
+    margin: 10px;
+  }
+  
+  .filter-container {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    background-color: #fff;
+    padding: 80px 20px 50px 20px;
+    width: 320px;
+    height: 100%;
+  }
+  
+  .filter-container.open {
+    left: 0;
+  }
+  
+  .filter-container h1 {
+    color: #333;
+    font-size: 20px;
+    letter-spacing: 2px;
+    margin: 0px 0px 25px 0px;
+  }
+  
+  .filter-container ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .filter-container ul li {
+    margin-bottom: 10px;
+  }
+  .filter-container ul li label {
+    font-size: 16px;
+    font-weight: 300;
+    color: #848484;
+  }
+  
+  .filter-links li a {
+    color: #000; 
+    text-decoration: none; 
+    transition: color 0.3s ease; 
+    margin-bottom: 15px;
+    cursor:pointer;
+  }
+  
+  .filter-links li a:hover {
+    color: #ffc107;
+  }

@@ -1,0 +1,54 @@
+﻿@model AdminDashboardMVC.DTO.OrderDTO
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="container p-5">
+    <h1>Edit</h1>
+
+    <h4>OrderDTO</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-6">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+               
+                <div class="form-group">
+                    <label asp-for="Statue" class="control-label"></label>
+                    <select asp-for="Statue" class="form-control">
+                        <option value="panding">Pending</option>
+                        <option value="inProgress">In Progress</option>
+                        <option value="complate">Completed</option>
+                    </select>
+                    <span asp-validation-for="Statue" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TotalPrice" class="control-label"></label>
+                    <input asp-for="TotalPrice" class="form-control" />
+                    <span asp-validation-for="TotalPrice" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="OrderDate" class="control-label"></label>
+                    <input type="date" asp-for="OrderDate" class="form-control" />
+                    <span asp-validation-for="OrderDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PhoneNumber" class="control-label"></label>
+                    <input asp-for="PhoneNumber" class="form-control" />
+                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                </div>
+                <br />
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-success" />
+                    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
